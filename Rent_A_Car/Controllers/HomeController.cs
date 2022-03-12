@@ -28,7 +28,7 @@ namespace Rent_A_Car.Controllers
             return View();
         }
 
-        public IActionResult TestIndex()
+        public IActionResult LoginIndex()
         {
             return View();
         }
