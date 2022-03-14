@@ -1,0 +1,6 @@
+bin
+obj
+.vs
+ASProject.sln
+appsettings.json
+log.txt

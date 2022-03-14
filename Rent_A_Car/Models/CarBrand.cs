@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -12,6 +13,7 @@ namespace Rent_A_Car
             Cars = new HashSet<Car>();
         }
 
+        [Key]
         public int CarBrandId { get; set; }
         public string CarBrandName { get; set; }
 

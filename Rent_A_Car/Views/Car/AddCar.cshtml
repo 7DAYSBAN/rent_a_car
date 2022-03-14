@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Car>
+
+<form method="post" asp-action="Create">
+    <div class="form-group row">
+        <h1 class="text-info pl-3">Add Car</h1>
+    </div>
+
+    <div class="row paddingBottom20">
+        <div class="container col-4">
+            <div class="row">
+                <h4 class="text-center col-12 mb-0">New Car Information</h4>
+                <sub class="text-right text-muted col-12"><a href="#" tabindex="-1"><i class="far fa-edit"></i></a></sub>
+            </div>
+            <div class="dropdown-divider mb-3"></div>
+            <div class="form-group row">
+                <label for="carbrand" class="col-4 col-form-label-sm text-right">Car brand:</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <input id="carbrand" name="text" type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label for="caryear" class="col-4 col-form-label-sm text-right">Car year:</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <input id="caryear" name="text" type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label for="cardesc" class="col-4 col-form-label-sm text-right">Description:</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <input id="cardesc" name="text" type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label for="carppday" class="col-4 col-form-label-sm text-right">Price per day:</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <input id="carppday" name="text" type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-8 offset-3 row">
+            <div class="col">
+                <input type="submit" class="btn btn-success w-50" value="Create" />
+            </div>
+            <div class="col">
+                <a asp-action="CarIndex" class="btn btn-primary w-50">Back</a>
+            </div>
+        </div>
+    </div>
+</form>

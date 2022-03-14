@@ -12,8 +12,7 @@ namespace Rent_A_Car
         {
         }
 
-        public RentACarContext(DbContextOptions<RentACarContext> options)
-            : base(options)
+        public RentACarContext(DbContextOptions<RentACarContext> options): base(options)
         {
         }
 

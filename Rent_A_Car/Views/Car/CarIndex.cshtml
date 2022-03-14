@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Car>
+
+
+@{
+    ViewData["Title"] = "Car";
+}
+
+<div class="container p-3">
+    <d1v  class="row pt-4">
+        <div class="col-6 ">
+            <h2 calss="text-priamry"> Car List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Car" asp-action="AddCar" class="btn btn-primary"> Add New Car</a>
+        </div>
+    </d1v>
+
+    <br /> <br />
+
+    @if(Model.Count() > 0)
+    {
+    <table class="table table-bordered table-striped" style="width: 100%;" >
+        <thead>
+            <tr>
+                <th>
+                    Car ID
+                </th>
+                <th>
+                    Car brand
+                </th>
+                <th>
+                    Car Year
+                </th>
+                <th>
+                    Car desc
+                </th>
+                <th>
+                    Price per day
+                </th>
+            </tr>
+        </thead>
+        <tbodyu>
+            @foreach(var obj in Model)
+            {
+            <tr>
+                <td> @obj.CarId</td>
+                <td> @obj.CarBrand</td>
+                <td> @obj.CarYear</td>
+                <td> @obj.Description</td>
+                <td> @obj.PricaPerDay</td>
+            </tr>
+            }
+        </tbodyu>
+    </table>
+    }
+    else
+    {
+    <p> No Cars yet.</p>
+    }
+
+
+</div>

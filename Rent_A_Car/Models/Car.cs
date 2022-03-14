@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
 namespace Rent_A_Car
 {
-    public partial class Car
+    public class Car
     {
         public Car()
         {
             BookedCars = new HashSet<BookedCar>();
         }
 
+        [Key]
         public int CarId { get; set; }
         public int CarBrandId { get; set; }
         public int CarYear { get; set; }
