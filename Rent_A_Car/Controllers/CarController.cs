@@ -20,9 +20,33 @@ namespace rent_a_car.Controllers
             return View(objList);
         }
 
-        public IActionResult AddCar()
+        public IActionResult Create()
         {
             return View();
         }
+        public IActionResult Delete()
+        {
+            return View();
+        }
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        public IActionResult BrandsIndex()
+        {
+            IEnumerable<Rent_A_Car.CarBrand> objList = _db.CarBrands;
+            return View(objList);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Create(Car ojc)
+         {
+            _db.Cars.Add(ojc);
+            _db.SaveChanges();
+            return RedirectToAction("CarIndex");
+         }
     }
 }

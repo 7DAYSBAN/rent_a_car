@@ -16,6 +16,7 @@ namespace Rent_A_Car
 
         [Key]
         public int CarId { get; set; }
+        [Range(0, 999)]
         public int CarBrandId { get; set; }
         public int CarYear { get; set; }
         public string Description { get; set; }
