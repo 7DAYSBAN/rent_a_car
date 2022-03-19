@@ -16,13 +16,12 @@ namespace Rent_A_Car
 
         [Key]
         public int CarId { get; set; }
-        [Range(0, 999)]
-        public int CarBrandId { get; set; }
+        public string Brand{ get; set; }
+        public string Model { get; set; }
         public int CarYear { get; set; }
         public string Description { get; set; }
         public decimal PricaPerDay { get; set; }
 
-        public virtual CarBrand CarBrand { get; set; }
         public virtual ICollection<BookedCar> BookedCars { get; set; }
     }
 }

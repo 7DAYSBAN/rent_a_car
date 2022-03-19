@@ -3,21 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace rent_a_car.Migrations
 {
-    public partial class AddCarsTodb : Migration
+    public partial class Nobrands : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Car_brand",
+                name: "Cars",
                 columns: table => new
                 {
-                    car_brand_id = table.Column<int>(type: "int", nullable: false)
+                    car_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    car_brand_name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true)
+                    brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    model = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    car_year = table.Column<int>(type: "int", nullable: false),
+                    description = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
+                    PricaPerDay = table.Column<decimal>(type: "decimal(2,0)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Car_brand", x => x.car_brand_id);
+                    table.PrimaryKey("PK_Cars", x => x.car_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,28 +41,6 @@ namespace rent_a_car.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.user_id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cars",
-                columns: table => new
-                {
-                    car_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    car_brand_id = table.Column<int>(type: "int", nullable: false),
-                    car_year = table.Column<int>(type: "int", nullable: false),
-                    description = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    PricaPerDay = table.Column<decimal>(type: "decimal(2,0)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cars", x => x.car_id);
-                    table.ForeignKey(
-                        name: "FK_cars_car_brand",
-                        column: x => x.car_brand_id,
-                        principalTable: "Car_brand",
-                        principalColumn: "car_brand_id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,11 +82,6 @@ namespace rent_a_car.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_car_brand_id",
-                table: "Cars",
-                column: "car_brand_id");
-
-            migrationBuilder.CreateIndex(
                 name: "UQ__Users__AB6E61647B9AE8EA",
                 table: "Users",
                 column: "email",
@@ -133,9 +110,6 @@ namespace rent_a_car.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Car_brand");
         }
     }
 }

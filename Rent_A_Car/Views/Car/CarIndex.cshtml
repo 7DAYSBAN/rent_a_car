@@ -42,19 +42,20 @@
             <tbodyu>
                 @foreach (var obj in Model)
                 {
-                    <tr>
-                        <td> @obj.CarId</td>
-                        <td> @obj.CarBrandId</td>
-                        <td> @obj.CarYear</td>
-                        <td> @obj.Description</td>
-                        <td> @obj.PricaPerDay</td>
-                        <td>
-                            <div>
-                                <a asp-controller="Car" asp-route-Id="@obj.CarId" asp-action="Edit" class="btn btn-primary">Edit</a>
-                                <a asp-controller="Car" asp-route-Id="@obj.CarId" asp-action="Delete" class="btn btn-danger">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
+                <tr>
+                    <td> @obj.CarId</td>
+                    <td> @obj.Brand</td>
+                    <td> @obj.Model</td>
+                    <td> @obj.CarYear</td>
+                    <td> @obj.Description</td>
+                    <td> @obj.PricaPerDay</td>
+                    <td>
+                        <div>
+                            <a asp-controller="Car" asp-route-Id="@obj.CarId" asp-action="Edit" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Car" asp-route-Id="@obj.CarId" asp-action="Delete" class="btn btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbodyu>
         </table>

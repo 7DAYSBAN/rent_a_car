@@ -62,9 +62,9 @@ namespace rent_a_car.Migrations
                         .HasColumnName("car_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarBrandId")
-                        .HasColumnType("int")
-                        .HasColumnName("car_brand_id");
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("brand");
 
                     b.Property<int>("CarYear")
                         .HasColumnType("int")
@@ -75,32 +75,16 @@ namespace rent_a_car.Migrations
                         .HasColumnType("varchar(max)")
                         .HasColumnName("description");
 
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("model");
+
                     b.Property<decimal>("PricaPerDay")
                         .HasColumnType("decimal(2,0)");
 
                     b.HasKey("CarId");
 
-                    b.HasIndex("CarBrandId");
-
                     b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("Rent_A_Car.CarBrand", b =>
-                {
-                    b.Property<int>("CarBrandId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("car_brand_id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CarBrandName")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)")
-                        .HasColumnName("car_brand_name");
-
-                    b.HasKey("CarBrandId");
-
-                    b.ToTable("Car_brand");
                 });
 
             modelBuilder.Entity("Rent_A_Car.User", b =>
@@ -193,23 +177,7 @@ namespace rent_a_car.Migrations
 
             modelBuilder.Entity("Rent_A_Car.Car", b =>
                 {
-                    b.HasOne("Rent_A_Car.CarBrand", "CarBrand")
-                        .WithMany("Cars")
-                        .HasForeignKey("CarBrandId")
-                        .HasConstraintName("FK_cars_car_brand")
-                        .IsRequired();
-
-                    b.Navigation("CarBrand");
-                });
-
-            modelBuilder.Entity("Rent_A_Car.Car", b =>
-                {
                     b.Navigation("BookedCars");
-                });
-
-            modelBuilder.Entity("Rent_A_Car.CarBrand", b =>
-                {
-                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("Rent_A_Car.User", b =>

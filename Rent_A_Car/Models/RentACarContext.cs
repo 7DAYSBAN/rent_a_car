@@ -18,7 +18,6 @@ namespace Rent_A_Car
 
         public virtual DbSet<BookedCar> BookedCars { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
-        public virtual DbSet<CarBrand> CarBrands { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -72,7 +71,8 @@ namespace Rent_A_Car
             {
                 entity.Property(e => e.CarId).HasColumnName("car_id");
 
-                entity.Property(e => e.CarBrandId).HasColumnName("car_brand_id");
+                entity.Property(e => e.Brand).HasColumnName("brand");
+                entity.Property(e => e.Model).HasColumnName("model");
 
                 entity.Property(e => e.CarYear).HasColumnName("car_year");
 
@@ -81,23 +81,6 @@ namespace Rent_A_Car
                     .HasColumnName("description");
 
                 entity.Property(e => e.PricaPerDay).HasColumnType("decimal(2, 0)");
-
-                entity.HasOne(d => d.CarBrand)
-                    .WithMany(p => p.Cars)
-                    .HasForeignKey(d => d.CarBrandId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_cars_car_brand");
-            });
-
-            modelBuilder.Entity<CarBrand>(entity =>
-            {
-                entity.ToTable("Car_brand");
-
-                entity.Property(e => e.CarBrandId).HasColumnName("car_brand_id");
-
-                entity.Property(e => e.CarBrandName)
-                    .HasMaxLength(25)
-                    .HasColumnName("car_brand_name");
             });
 
             modelBuilder.Entity<User>(entity =>

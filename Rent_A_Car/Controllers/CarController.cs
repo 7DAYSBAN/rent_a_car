@@ -33,12 +33,6 @@ namespace rent_a_car.Controllers
             return View();
         }
 
-        public IActionResult BrandsIndex()
-        {
-            IEnumerable<Rent_A_Car.CarBrand> objList = _db.CarBrands;
-            return View(objList);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
 
