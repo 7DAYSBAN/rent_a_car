@@ -17,7 +17,7 @@ namespace rent_a_car.Migrations
                     model = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     car_year = table.Column<int>(type: "int", nullable: false),
                     description = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    PricaPerDay = table.Column<decimal>(type: "decimal(2,0)", nullable: false)
+                    PricaPerDay = table.Column<decimal>(type: "decimal(8,3)", nullable: false)
                 },
                 constraints: table =>
                 {

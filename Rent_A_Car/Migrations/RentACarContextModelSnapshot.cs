@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rent_A_Car;
 
+
 namespace rent_a_car.Migrations
 {
     [DbContext(typeof(RentACarContext))]
@@ -80,7 +81,7 @@ namespace rent_a_car.Migrations
                         .HasColumnName("model");
 
                     b.Property<decimal>("PricaPerDay")
-                        .HasColumnType("decimal(2,0)");
+                        .HasColumnType("decimal(8,3)");
 
                     b.HasKey("CarId");
 
