@@ -17,10 +17,10 @@ namespace Rent_A_Car.Data
             //Seed Default User
             var defaultUser = new ApplicationUser
             {
-                UserName = "admin1",
+                UserName = "admin",
                 Email = "admin@gmail.com",
-                FirstName = "Pavel",
-                LastName = "Panev",
+                FirstName = "admin",
+                LastName = "admin",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
@@ -29,7 +29,7 @@ namespace Rent_A_Car.Data
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "123456Pa.");
+                    await userManager.CreateAsync(defaultUser, "123456789Pa.");
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.User.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Admin.ToString());
                 }
