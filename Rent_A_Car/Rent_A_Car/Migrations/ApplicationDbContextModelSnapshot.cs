@@ -151,6 +151,66 @@ namespace Rent_A_Car.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("Rent_A_Car.BookedCar", b =>
+                {
+                    b.Property<int>("BookCarId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookCarId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("BookedCars");
+                });
+
+            modelBuilder.Entity("Rent_A_Car.Car", b =>
+                {
+                    b.Property<int>("CarId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CarYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PricePerDay")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("CarId");
+
+                    b.ToTable("Cars");
+                });
+
             modelBuilder.Entity("Rent_A_Car.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -208,9 +268,6 @@ namespace Rent_A_Car.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<byte[]>("ProfilePicture")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -221,11 +278,11 @@ namespace Rent_A_Car.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("UserPhone")
+                    b.Property<string>("UserName2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsernameChangeLimit")
-                        .HasColumnType("int");
+                    b.Property<string>("UserPhone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -289,6 +346,33 @@ namespace Rent_A_Car.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Rent_A_Car.BookedCar", b =>
+                {
+                    b.HasOne("Rent_A_Car.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("BookedCars")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Rent_A_Car.Car", "Car")
+                        .WithMany("BookedCars")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Car");
+                });
+
+            modelBuilder.Entity("Rent_A_Car.Car", b =>
+                {
+                    b.Navigation("BookedCars");
+                });
+
+            modelBuilder.Entity("Rent_A_Car.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("BookedCars");
                 });
 #pragma warning restore 612, 618
         }

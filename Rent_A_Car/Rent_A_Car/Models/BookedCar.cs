@@ -1,5 +1,22 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿using Rent_A_Car.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+#nullable disable
+
+namespace Rent_A_Car
+{
+    public partial class BookedCar
+    {
+        [Key]
+        public int BookCarId { get; set; }
+        public int CarId { get; set; }
+        public int UserId { get; set; }
+        public DateTime StartDay { get; set; }
+        public DateTime EndDay { get; set; }
+
+        public virtual Car Car { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+    }
 }

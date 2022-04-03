@@ -10,13 +10,16 @@ namespace Rent_A_Car.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        
+        public virtual DbSet<BookedCar> BookedCars { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            
+
             base.OnModelCreating(builder);
             builder.HasDefaultSchema("Identity");
             builder.Entity<ApplicationUser>(entity =>
