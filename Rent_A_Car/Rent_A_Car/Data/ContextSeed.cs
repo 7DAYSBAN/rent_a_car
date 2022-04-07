@@ -19,6 +19,7 @@ namespace Rent_A_Car.Data
             {
                 UserName = "admin",
                 Email = "admin@gmail.com",
+                Password = "123456Pv!",
                 FirstName = "admin",
                 LastName = "admin",
                 EmailConfirmed = true,

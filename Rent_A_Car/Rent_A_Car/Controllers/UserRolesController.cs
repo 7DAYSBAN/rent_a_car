@@ -19,7 +19,7 @@ namespace Rent_A_Car.Controllers
         {
             _roleManager = roleManager;
             _userManager = userManager;
-        }
+       }
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
