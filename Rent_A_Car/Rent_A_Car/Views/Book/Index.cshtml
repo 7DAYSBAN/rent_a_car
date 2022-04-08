@@ -1,56 +1,61 @@
-﻿@model IEnumerable<Rent_A_Car.BookedCar>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Car.Brand)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var item in Model)
-        { 
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Car.Brand)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BookCarId">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookCarId">Delete</a>
-            </td>
-        </tr>
-        }
-        
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Rent_A_Car.BookedCar>
+    @inject SignInManager<ApplicationUser> SignInManager
+    @inject UserManager<ApplicationUser> UserManager
 
 
-    </tbody>
-</table>
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <h1>Reservations</h1>
+
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Car.Brand)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.CarId)
+                    </td>
+                    <td>
+                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.BookCarId">Edit</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.BookCarId">Delete</a>
+                    </td>
+                </tr>
+            }
+
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }
+
+        </tbody>
+    </table>

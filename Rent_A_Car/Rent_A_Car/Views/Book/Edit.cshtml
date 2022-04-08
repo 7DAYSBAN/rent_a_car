@@ -18,11 +18,14 @@
                 <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>
                 <span asp-validation-for="CarId" class="text-danger"></span>
             </div>
+            @if(User.IsInRole("Admin"))
+            {
             <div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
                 <input asp-for="UserId" class="form-control" />
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
+            }
             <div class="form-group">
                 <label asp-for="StartDay" class="control-label"></label>
                 <input asp-for="StartDay" class="form-control" />

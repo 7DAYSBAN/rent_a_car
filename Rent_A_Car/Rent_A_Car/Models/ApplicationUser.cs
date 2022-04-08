@@ -12,7 +12,5 @@ namespace Rent_A_Car.Models
         public string Emaill { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-    }
-    
-    
+    }      
 }

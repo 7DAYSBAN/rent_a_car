@@ -4,11 +4,11 @@
     ViewData["Title"] = "CarIndex";
 }
 
-<h1>CarIndex</h1>
+<h1>Car Archive</h1>
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-action="Create">Create New</a>
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
     </p>
 }
 <table class="table">
@@ -29,7 +29,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PricePerDay)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -51,18 +50,13 @@
                 @Html.DisplayFor(modelItem => item.PricePerDay)
             </td>
 
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                        <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a>
-                    
-                    }
-                <a asp-action="Details" asp-route-id="@item.CarId">Details</a> |
-                @if (User.IsInRole("Admin"))
-                {
-                        <a asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
-                    }
-            </td>
+            @if (User.IsInRole("Admin"))
+             {
+                 <td>
+                         <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.CarId">Edit</a>
+                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
+                </td>
+             }
         </tr>
 }
     </tbody>

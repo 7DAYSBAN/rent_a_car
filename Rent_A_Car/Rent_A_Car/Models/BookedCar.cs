@@ -15,7 +15,6 @@ namespace Rent_A_Car
         public int CarId { get; set; }
         public DateTime StartDay { get; set; }
         public DateTime EndDay { get; set; }
-
         public virtual Car Car { get; set; }
 
     }

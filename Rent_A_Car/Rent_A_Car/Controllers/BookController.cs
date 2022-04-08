@@ -8,12 +8,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Rent_A_Car;
 
 namespace Rent_A_Car.Controllers
 {
     public class BookController : Controller
     {
         private readonly ApplicationDbContext _db;
+
         public BookController(ApplicationDbContext db)
         {
             _db = db;
@@ -22,36 +24,45 @@ namespace Rent_A_Car.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<BookedCar> objList = _db.BookedCars;
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
-            ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
-            return View(objList);
+            if (User.IsInRole("Admin"))
+            {
+                IEnumerable<BookedCar> objList = _db.BookedCars;
+                ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Brand");
+                ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
+                return View(objList);
+            }
+            else
+            {
+                IEnumerable<BookedCar> objList = _db.BookedCars.Where(x => x.UserId == User.Identity.GetUserId());
+                ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Brand");
+                ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
+                return View(objList);
+            }
         }
 
-        //  GET 
+        //  GET - CREATE
         public IActionResult Create()
         {
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
-            ViewData["Id"] = new SelectList(_db.Cars, "Users", "Users");
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Model");
+            ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             return View();
         }
-        // POST
+        // POST - CREATE
         [HttpPost]
         public IActionResult Create(BookedCar obj) 
         {
-          // var id = await _db.GetUserAsync(HttpContext.User);
-            if (ModelState.IsValid )//&& id != null) 
-            {
-             //  obj.UserId = id;
-                _db.BookedCars.Add(obj);
-                _db.SaveChanges();
-                return View("Index");
-            }
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
-            ViewData["Id"] = new SelectList(_db.Cars, "Users", "Users");
+                var id = User.Identity.GetUserId();
+                if (ModelState.IsValid && id != null) 
+                {
+                     obj.UserId = id; 
+
+                    _db.BookedCars.Add(obj);
+                    _db.SaveChanges();
+                    return View("Index");
+                }
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Model");
+            ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             return View();
-
-
         }
 
         // GET  - EDIT
@@ -66,7 +77,7 @@ namespace Rent_A_Car.Controllers
             {
                 return NotFound();
             }
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Model");
             ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             return View(obj);
         }
@@ -76,24 +87,33 @@ namespace Rent_A_Car.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(BookedCar obj)
         {
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Model");
             ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             _db.BookedCars.Update(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        // GET
-        public IActionResult Delete()
+        // GET - DELETE
+        [HttpGet]
+        public IActionResult Delete(int? id)
         {
-
-            return View();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.BookedCars.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
         }
 
         // POST - DELETE
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int? id)
+        public IActionResult DeletePost(int? id)
         {
             var obj = _db.BookedCars.Find(id);
             if (obj == null)
@@ -104,7 +124,5 @@ namespace Rent_A_Car.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-    //fuck you wow :3  
     }
 }

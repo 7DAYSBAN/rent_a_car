@@ -11,6 +11,7 @@ namespace Rent_A_Car
     {
         public Car()
         {
+           // FullCarInfo = Model + " " + Brand + "/ " + PricePerDay.ToString();
             BookedCars = new HashSet<BookedCar>();
         }
 
@@ -23,6 +24,7 @@ namespace Rent_A_Car
         public string Model { get; set; }
         [Required]
         public int CarYear { get; set; }
+     //   public string FullCarInfo { get; set; } 
         public string Description { get; set; }
         [Required]
         [Range(0, 999.99)]
