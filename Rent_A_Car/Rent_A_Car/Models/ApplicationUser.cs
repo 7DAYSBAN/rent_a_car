@@ -12,8 +12,6 @@ namespace Rent_A_Car.Models
         public string Emaill { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        public virtual ICollection<BookedCar> BookedCars { get; set; }
     }
     
     

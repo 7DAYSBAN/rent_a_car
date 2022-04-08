@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Rent_A_Car.Controllers;
 using Rent_A_Car.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Rent_A_Car.Data
         }
         public virtual DbSet<BookedCar> BookedCars { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
+        public IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole> User { get;  set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Rent_A_Car.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Rent_A_Car.Controllers
 {
@@ -15,25 +19,92 @@ namespace Rent_A_Car.Controllers
             _db = db;
         }
 
+
         public IActionResult Index()
         {
             IEnumerable<BookedCar> objList = _db.BookedCars;
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
+            ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             return View(objList);
         }
 
+        //  GET 
         public IActionResult Create()
         {
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
+            ViewData["Id"] = new SelectList(_db.Cars, "Users", "Users");
             return View();
         }
-        public IActionResult Edit()
+        // POST
+        [HttpPost]
+        public IActionResult Create(BookedCar obj) 
         {
-
+          // var id = await _db.GetUserAsync(HttpContext.User);
+            if (ModelState.IsValid )//&& id != null) 
+            {
+             //  obj.UserId = id;
+                _db.BookedCars.Add(obj);
+                _db.SaveChanges();
+                return View("Index");
+            }
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
+            ViewData["Id"] = new SelectList(_db.Cars, "Users", "Users");
             return View();
+
+
         }
+
+        // GET  - EDIT
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.BookedCars.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
+            ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
+            return View(obj);
+        }
+
+        // POST - EDIT
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(BookedCar obj)
+        {
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "CarId");
+            ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
+            _db.BookedCars.Update(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET
         public IActionResult Delete()
         {
 
             return View();
         }
+
+        // POST - DELETE
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int? id)
+        {
+            var obj = _db.BookedCars.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.BookedCars.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+    //fuck you wow :3  
     }
 }

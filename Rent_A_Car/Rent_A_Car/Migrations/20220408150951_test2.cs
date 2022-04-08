@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Rent_A_Car.Migrations
 {
-    public partial class Bonussiiiii : Migration
+    public partial class test2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -77,6 +77,30 @@ namespace Rent_A_Car.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BookedCars",
+                schema: "Identity",
+                columns: table => new
+                {
+                    BookCarId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    StartDay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDay = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookedCars", x => x.BookCarId);
+                    table.ForeignKey(
+                        name: "FK_BookedCars_Cars_CarId",
+                        column: x => x.CarId,
+                        principalSchema: "Identity",
+                        principalTable: "Cars",
+                        principalColumn: "CarId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 schema: "Identity",
                 columns: table => new
@@ -97,38 +121,6 @@ namespace Rent_A_Car.Migrations
                         principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookedCars",
-                schema: "Identity",
-                columns: table => new
-                {
-                    BookCarId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    StartDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookedCars", x => x.BookCarId);
-                    table.ForeignKey(
-                        name: "FK_BookedCars_Cars_CarId",
-                        column: x => x.CarId,
-                        principalSchema: "Identity",
-                        principalTable: "Cars",
-                        principalColumn: "CarId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookedCars_User_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalSchema: "Identity",
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,12 +216,6 @@ namespace Rent_A_Car.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookedCars_ApplicationUserId",
-                schema: "Identity",
-                table: "BookedCars",
-                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookedCars_CarId",

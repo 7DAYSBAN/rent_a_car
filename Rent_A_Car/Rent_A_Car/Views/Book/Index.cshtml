@@ -22,16 +22,17 @@
                 @Html.DisplayNameFor(model => model.EndDay)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car)
+                @Html.DisplayNameFor(model => model.Car.Brand)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach(var item in Model)
+        { 
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUser)
+                @Html.DisplayFor(modelItem => item.UserId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDay)
@@ -47,7 +48,8 @@
                 <a asp-action="Delete" asp-route-id="@item.BookCarId">Delete</a>
             </td>
         </tr>
-}
+        }
+        
 
 
     </tbody>

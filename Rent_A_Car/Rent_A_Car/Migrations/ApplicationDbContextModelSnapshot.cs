@@ -158,9 +158,6 @@ namespace Rent_A_Car.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
@@ -170,12 +167,10 @@ namespace Rent_A_Car.Migrations
                     b.Property<DateTime>("StartDay")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookCarId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CarId");
 
@@ -350,27 +345,16 @@ namespace Rent_A_Car.Migrations
 
             modelBuilder.Entity("Rent_A_Car.BookedCar", b =>
                 {
-                    b.HasOne("Rent_A_Car.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("BookedCars")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("Rent_A_Car.Car", "Car")
                         .WithMany("BookedCars")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
-
                     b.Navigation("Car");
                 });
 
             modelBuilder.Entity("Rent_A_Car.Car", b =>
-                {
-                    b.Navigation("BookedCars");
-                });
-
-            modelBuilder.Entity("Rent_A_Car.Models.ApplicationUser", b =>
                 {
                     b.Navigation("BookedCars");
                 });
