@@ -57,14 +57,10 @@ namespace Rent_A_Car.Controllers
             var id = User.Identity.GetUserId();
             var car = _db.Cars.Find(obj.CarId).FullCarInfo;
 
-            if (ModelState.IsValid && id != null) 
-                {
                     obj.UserId = id;
                     obj.CarModelDetails = car;
                     _db.BookedCars.Add(obj);
                     _db.SaveChanges();
-                return View("BookIndex");
-            }
             ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
             ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             return View("BookIndex");

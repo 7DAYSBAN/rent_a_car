@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Rent_A_Car.Migrations
 {
-    public partial class CarsFixed : Migration
+    public partial class Migration5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,6 @@ namespace Rent_A_Car.Migrations
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CarYear = table.Column<int>(type: "int", nullable: false),
-                    FullCarInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PricePerDay = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -84,7 +83,7 @@ namespace Rent_A_Car.Migrations
                 {
                     BookCarId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CarId = table.Column<int>(type: "int", nullable: false),
                     StartDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDay = table.Column<DateTime>(type: "datetime2", nullable: false),

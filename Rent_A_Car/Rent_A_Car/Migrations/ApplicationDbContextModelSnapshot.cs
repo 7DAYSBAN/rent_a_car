@@ -171,6 +171,7 @@ namespace Rent_A_Car.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookCarId");
@@ -195,9 +196,6 @@ namespace Rent_A_Car.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullCarInfo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
