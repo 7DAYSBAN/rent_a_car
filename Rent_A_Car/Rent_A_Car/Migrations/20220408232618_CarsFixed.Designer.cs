@@ -10,8 +10,8 @@ using Rent_A_Car.Data;
 namespace Rent_A_Car.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220408150951_test2")]
-    partial class test2
+    [Migration("20220408232618_CarsFixed")]
+    partial class CarsFixed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -163,6 +163,9 @@ namespace Rent_A_Car.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CarModelDetails")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("EndDay")
                         .HasColumnType("datetime2");
 
@@ -194,6 +197,9 @@ namespace Rent_A_Car.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullCarInfo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")

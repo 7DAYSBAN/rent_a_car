@@ -33,13 +33,13 @@
             @Html.DisplayNameFor(model => model.Car)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Car.Brand)
+            @Html.DisplayFor(model => model.CarModelDetails)
         </dd class>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="BookCarId" />
         <input type="submit" value="Delete" class="btn btn-danger" />
-        <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        <a class="btn btn-primary" asp-action="BookIndex">Back to List</a>
     </form>
 </div>

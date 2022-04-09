@@ -43,20 +43,29 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CarYear)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+            @if (item.Description == null)
+            {
+                <td>
+                    <p style="text-align:left;"><b>No Description</p>    
             </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            }
             <td>
-                @Html.DisplayFor(modelItem => item.PricePerDay)
+                @Html.DisplayFor(modelItem => item.PricePerDay)$
             </td>
 
             @if (User.IsInRole("Admin"))
-             {
-                 <td>
-                         <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.CarId">Edit</a>
-                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
+            {
+                <td>
+                    <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.CarId">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
                 </td>
-             }
+            }
         </tr>
 }
     </tbody>

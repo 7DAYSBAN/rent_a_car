@@ -22,50 +22,56 @@ namespace Rent_A_Car.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult BookIndex()
         {
             if (User.IsInRole("Admin"))
             {
                 IEnumerable<BookedCar> objList = _db.BookedCars;
-                ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Brand");
+                ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
                 ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
                 return View(objList);
             }
-            else
+
+            if (User.IsInRole("User"))
             {
-                IEnumerable<BookedCar> objList = _db.BookedCars.Where(x => x.UserId == User.Identity.GetUserId());
-                ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Brand");
-                ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
-                return View(objList);
+                    IEnumerable<BookedCar> objList = _db.BookedCars.Where(x => x.UserId == User.Identity.GetUserId());
+                    ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
+                    ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
+                    return View(objList);
             }
+            return View();
         }
 
         //  GET - CREATE
+        [HttpGet]
         public IActionResult Create()
         {
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Model");
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
             ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             return View();
         }
         // POST - CREATE
-        [HttpPost]
+        [HttpPost, ActionName("Create")]
         public IActionResult Create(BookedCar obj) 
         {
-                var id = User.Identity.GetUserId();
-                if (ModelState.IsValid && id != null) 
-                {
-                     obj.UserId = id; 
+            var id = User.Identity.GetUserId();
+            var car = _db.Cars.Find(obj.CarId).FullCarInfo;
 
+            if (ModelState.IsValid && id != null) 
+                {
+                    obj.UserId = id;
+                    obj.CarModelDetails = car;
                     _db.BookedCars.Add(obj);
                     _db.SaveChanges();
-                    return View("Index");
-                }
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Model");
+                return View("BookIndex");
+            }
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
             ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
-            return View();
+            return View("BookIndex");
         }
 
         // GET  - EDIT
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -77,7 +83,7 @@ namespace Rent_A_Car.Controllers
             {
                 return NotFound();
             }
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Model");
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
             ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             return View(obj);
         }
@@ -87,11 +93,11 @@ namespace Rent_A_Car.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(BookedCar obj)
         {
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "Model");
+            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
             ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             _db.BookedCars.Update(obj);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("BookIndex");
         }
 
         // GET - DELETE
@@ -122,7 +128,7 @@ namespace Rent_A_Car.Controllers
             }
             _db.BookedCars.Remove(obj);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("BookIndex");
         }
     }
 }

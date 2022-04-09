@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BookCarId" />
             <div class="form-group">
-                <label asp-for="CarId" class="control-label"></label>
+                <label asp-for="CarId" class="control-label">Car</label>
                 <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>
                 <span asp-validation-for="CarId" class="text-danger"></span>
             </div>
@@ -38,13 +38,10 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-success" asp-action="BookIndex">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

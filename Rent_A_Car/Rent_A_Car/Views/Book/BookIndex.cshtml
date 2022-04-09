@@ -5,7 +5,7 @@
 
 
     @{
-        ViewData["Title"] = "Index";
+        ViewData["Title"] = "Reservations";
     }
 
     <h1>Reservations</h1>
@@ -26,13 +26,13 @@
                     @Html.DisplayNameFor(model => model.EndDay)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Car.Brand)
+                    <p>Vechicle</p>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
+            @foreach (BookedCar item in Model)
+             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserId)
@@ -44,7 +44,7 @@
                         @Html.DisplayFor(modelItem => item.EndDay)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Car.CarId)
+                        @Html.DisplayFor(modelItem => item.CarModelDetails)
                     </td>
                     <td>
                         <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.BookCarId">Edit</a>

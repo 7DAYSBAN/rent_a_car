@@ -11,11 +11,16 @@ namespace Rent_A_Car
     {
         [Key]
         public int BookCarId { get; set; }
+        [Required]
         public string UserId { get; set; }
+        [Required]
         public int CarId { get; set; }
+        [Required]
         public DateTime StartDay { get; set; }
+        [Required]
         public DateTime EndDay { get; set; }
         public virtual Car Car { get; set; }
+        public string CarModelDetails{ get; set; }
 
     }
 }

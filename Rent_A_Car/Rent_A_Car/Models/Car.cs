@@ -11,12 +11,10 @@ namespace Rent_A_Car
     {
         public Car()
         {
-           // FullCarInfo = Model + " " + Brand + "/ " + PricePerDay.ToString();
             BookedCars = new HashSet<BookedCar>();
         }
 
-        [Key]
-        
+        [Key]      
         public int CarId { get; set; }
         [Required]
         public string Brand { get; set; }
@@ -24,12 +22,12 @@ namespace Rent_A_Car
         public string Model { get; set; }
         [Required]
         public int CarYear { get; set; }
-     //   public string FullCarInfo { get; set; } 
         public string Description { get; set; }
         [Required]
         [Range(0, 999.99)]
         public decimal PricePerDay { get; set; }
 
+        public string FullCarInfo => $"{Brand} {Model} {PricePerDay}$";
         public bool IsBooked = false;
 
         public virtual ICollection<BookedCar> BookedCars { get; set; }

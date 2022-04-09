@@ -40,7 +40,6 @@ namespace Rent_A_Car.Controllers
             return View(userRolesViewModel);
         }
 
-        // GET - MANAGE
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Manage(string userId)
@@ -74,7 +73,6 @@ namespace Rent_A_Car.Controllers
             return View(model);
         }
 
-        // POST - MANAGE
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
