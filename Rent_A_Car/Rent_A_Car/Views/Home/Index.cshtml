@@ -1,8 +1,89 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<head>
+<style>
+    html {
+        background-color: #ffffcc;
+        font-family: 'Courier New', monospace;
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    p {
+        text-align: center;
+        font-size: 30px;
+        color: black;
+    }
+    img{
+        width: 40px;
+        height:40px;
+    }
+
+    .contacts {
+        font-size: 20px;
+        color: #666699;
+        border: 2px;
+        border-style: solid;
+        border-color: #ffff66;
+    }
+    .instagram-photo {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .instagram-tag {
+        display: inline-block;
+        
+    }
+    .facebook-photo {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .facebook-tag {
+        display: inline-block;
+    }
+    .welcome-form {
+        border: 2px;
+        background-color: #ffff66;
+    }
+   
+    
+
+</style>
+</head>
+<body>
+    <form class="welcome-form">
+        <p class="welcome"><b><i>WELCOME TO OUR RENT A CAR!</i></b></p>
+
+    </form>
+    <p>
+        If you have a problem or you want to call us...
+    </p>
+
+    <form>
+        <p class="contacts">
+            +359 876 123 456<br>
+            star.rent@gmail.com<br>
+        </p>
+    </form>
+    <br><br> <br><br> <br><br>
+    <div class="instagram-photo">
+        <img src="~/images/instagram.jpg" alt="img" />
+    </div>
+    <div class="instagram-tag" style="display:inline-block;">
+        <p>
+            <small>
+                star.rent_official
+            </small>
+        </p>
+    </div>
+
+    <div class="facebook-photo">
+        <img src="~/images/facebook.png" alt="img" />
+    </div>
+    <div class="facebook-tag">
+        <p>
+            <small>
+                Star Rent Official
+            </small>
+        </p>
+    </div>
+</body>
