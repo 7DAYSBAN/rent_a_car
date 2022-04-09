@@ -22,7 +22,7 @@ namespace Rent_A_Car.Controllers
        }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.ToListAsync();
@@ -74,7 +74,7 @@ namespace Rent_A_Car.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -99,7 +99,7 @@ namespace Rent_A_Car.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         private async Task<List<string>> GetUserRoles(ApplicationUser user)
         {
             return new List<string>(await _userManager.GetRolesAsync(user));
