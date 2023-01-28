@@ -17,14 +17,14 @@ namespace Rent_A_Car.Controllers
             _roleManager = roleManager;
         }
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var roles = await _roleManager.Roles.ToListAsync();
             return View(roles);
         }
 
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRole(string roleName)
         {
             if (roleName != null)

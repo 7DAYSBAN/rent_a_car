@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Rent_A_Car.Data;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Rent_A_Car.Controllers
 {
@@ -62,9 +63,29 @@ namespace Rent_A_Car.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Car obj)
         {
-            _db.Cars.Update(obj);
-            _db.SaveChanges();
-            return RedirectToAction("CarIndex");
+            var car = _db.Cars.FirstOrDefault(x => x.CarId == obj.CarId);
+            var booking = _db.BookedCars.Find(obj.CarId);
+
+            if (booking.CarId == 0)
+            {
+                return RedirectToAction("CarIndex");
+            }
+            else
+            {
+                car = new Car()
+                {
+                    CarYear = obj.CarYear,
+                    Description = obj.Description,
+                    PricePerDay = obj.PricePerDay,
+                    Brand = obj.Brand,
+                    Model = obj.Model
+                };
+
+                booking.Car = car;
+
+                _db.SaveChanges();
+                return RedirectToAction("CarIndex");
+            }
         }
 
         // GET  - DELETE

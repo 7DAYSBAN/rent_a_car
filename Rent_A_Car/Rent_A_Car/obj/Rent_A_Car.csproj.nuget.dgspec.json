@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Val\\Documents\\GitHub\\rent_a_car\\Rent_A_Car\\Rent_A_Car\\Rent_A_Car.csproj": {}
+    "C:\\Users\\Val\\Documents\\GitHub\\ASP.NET  Rent_A_Car\\Rent_A_Car\\Rent_A_Car\\Rent_A_Car.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Val\\Documents\\GitHub\\rent_a_car\\Rent_A_Car\\Rent_A_Car\\Rent_A_Car.csproj": {
+    "C:\\Users\\Val\\Documents\\GitHub\\ASP.NET  Rent_A_Car\\Rent_A_Car\\Rent_A_Car\\Rent_A_Car.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Val\\Documents\\GitHub\\rent_a_car\\Rent_A_Car\\Rent_A_Car\\Rent_A_Car.csproj",
+        "projectUniqueName": "C:\\Users\\Val\\Documents\\GitHub\\ASP.NET  Rent_A_Car\\Rent_A_Car\\Rent_A_Car\\Rent_A_Car.csproj",
         "projectName": "Rent_A_Car",
-        "projectPath": "C:\\Users\\Val\\Documents\\GitHub\\rent_a_car\\Rent_A_Car\\Rent_A_Car\\Rent_A_Car.csproj",
+        "projectPath": "C:\\Users\\Val\\Documents\\GitHub\\ASP.NET  Rent_A_Car\\Rent_A_Car\\Rent_A_Car\\Rent_A_Car.csproj",
         "packagesPath": "C:\\Users\\Val\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Val\\Documents\\GitHub\\rent_a_car\\Rent_A_Car\\Rent_A_Car\\obj\\",
+        "outputPath": "C:\\Users\\Val\\Documents\\GitHub\\ASP.NET  Rent_A_Car\\Rent_A_Car\\Rent_A_Car\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\Val\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -83,10 +88,17 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -95,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.212\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

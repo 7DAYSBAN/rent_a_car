@@ -29,10 +29,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.PricePerDay)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullCarInfo)
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Brand)
@@ -58,6 +61,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PricePerDay)$
             </td>
+            <td>
+                @Html.DisplayNameFor(model => model.FullCarInfo)
+            </td>
+
 
             @if (User.IsInRole("Admin"))
             {

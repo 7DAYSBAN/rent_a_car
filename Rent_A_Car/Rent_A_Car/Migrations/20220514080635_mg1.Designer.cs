@@ -10,8 +10,8 @@ using Rent_A_Car.Data;
 namespace Rent_A_Car.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220409091114_Migration5")]
-    partial class Migration5
+    [Migration("20220514080635_mg1")]
+    partial class mg1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

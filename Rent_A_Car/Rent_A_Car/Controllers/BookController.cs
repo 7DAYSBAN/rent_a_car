@@ -21,7 +21,6 @@ namespace Rent_A_Car.Controllers
             _db = db;
         }
 
-
         public IActionResult BookIndex()
         {
             if (User.IsInRole("Admin"))
@@ -38,7 +37,8 @@ namespace Rent_A_Car.Controllers
                     ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
                     ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
                     return View(objList);
-            }
+
+            } 
             return View();
         }
 
@@ -46,8 +46,8 @@ namespace Rent_A_Car.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
-            ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
+            ViewData["FullCarInfo"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
+           // ViewData["UserId"] = new SelectList(_db.Users, "Users", "Users");
             return View();
         }
         // POST - CREATE
@@ -58,11 +58,9 @@ namespace Rent_A_Car.Controllers
             var car = _db.Cars.Find(obj.CarId).FullCarInfo;
 
                     obj.UserId = id;
-                    obj.CarModelDetails = car;
+                    obj.CarModelDetails = car;      
                     _db.BookedCars.Add(obj);
                     _db.SaveChanges();
-            ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
-            ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
             return View("BookIndex");
         }
 
@@ -91,8 +89,10 @@ namespace Rent_A_Car.Controllers
         {
             ViewData["CarId"] = new SelectList(_db.Cars, "CarId", "FullCarInfo");
             ViewData["UserId"] = new SelectList(_db.Cars, "Users", "Users");
+            
             _db.BookedCars.Update(obj);
             _db.SaveChanges();
+
             return RedirectToAction("BookIndex");
         }
 

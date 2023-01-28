@@ -28,7 +28,6 @@ namespace Rent_A_Car
         public decimal PricePerDay { get; set; }
 
         public string FullCarInfo => $"{Brand} {Model} {PricePerDay}$";
-        public bool IsBooked = false;
 
         public virtual ICollection<BookedCar> BookedCars { get; set; }
     }
