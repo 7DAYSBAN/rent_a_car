@@ -15,20 +15,21 @@
     </p>
     <table class="table">
         <thead>
-            <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.UserId)
+                   User Id
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.StartDay)
+                   Start Day
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.EndDay)
+                    End Day
                 </th>
                 <th>
-                    <p>Vechicle</p>
+                    Vechicle
                 </th>
-            </tr>
+                <th>
+                    Actions
+                </th>
         </thead>
         <tbody>
             @foreach (BookedCar item in Model)
