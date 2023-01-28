@@ -14,8 +14,8 @@ namespace Rent_A_Car.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        public virtual DbSet<BookedCar> BookedCars { get; set; }
-        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Reservation> Reservation { get; set; }
+        public virtual DbSet<Car> Car { get; set; }
         public IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole> User { get;  set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

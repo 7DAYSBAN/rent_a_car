@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Rent_A_Car.Migrations
 {
-    public partial class mg1 : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,21 +11,22 @@ namespace Rent_A_Car.Migrations
                 name: "Identity");
 
             migrationBuilder.CreateTable(
-                name: "Cars",
+                name: "Car",
                 schema: "Identity",
                 columns: table => new
                 {
-                    CarId = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CarYear = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PricePerDay = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    model = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    year = table.Column<int>(type: "int", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    is_booked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.CarId);
+                    table.PrimaryKey("PK_Car", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,27 +78,28 @@ namespace Rent_A_Car.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookedCars",
+                name: "Reservation",
                 schema: "Identity",
                 columns: table => new
                 {
-                    BookCarId = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    StartDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CarModelDetails = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    start_day = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    end_day = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    state = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    user = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    car_id = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookedCars", x => x.BookCarId);
+                    table.PrimaryKey("PK_Reservation", x => x.id);
                     table.ForeignKey(
-                        name: "FK_BookedCars_Cars_CarId",
-                        column: x => x.CarId,
+                        name: "FK_Reservation_Car_car_id",
+                        column: x => x.car_id,
                         principalSchema: "Identity",
-                        principalTable: "Cars",
-                        principalColumn: "CarId",
+                        principalTable: "Car",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -219,10 +221,10 @@ namespace Rent_A_Car.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookedCars_CarId",
+                name: "IX_Reservation_car_id",
                 schema: "Identity",
-                table: "BookedCars",
-                column: "CarId");
+                table: "Reservation",
+                column: "car_id");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -274,7 +276,7 @@ namespace Rent_A_Car.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BookedCars",
+                name: "Reservation",
                 schema: "Identity");
 
             migrationBuilder.DropTable(
@@ -298,7 +300,7 @@ namespace Rent_A_Car.Migrations
                 schema: "Identity");
 
             migrationBuilder.DropTable(
-                name: "Cars",
+                name: "Car",
                 schema: "Identity");
 
             migrationBuilder.DropTable(

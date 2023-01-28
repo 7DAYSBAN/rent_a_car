@@ -17,7 +17,7 @@ namespace Rent_A_Car.Migrations
             modelBuilder
                 .HasDefaultSchema("Identity")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.15")
+                .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -151,63 +151,41 @@ namespace Rent_A_Car.Migrations
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("Rent_A_Car.BookedCar", b =>
-                {
-                    b.Property<int>("BookCarId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CarModelDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BookCarId");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("BookedCars");
-                });
-
             modelBuilder.Entity("Rent_A_Car.Car", b =>
                 {
-                    b.Property<int>("CarId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CarYear")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("brand");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("IsBooked")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_booked");
 
                     b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("model");
 
-                    b.Property<decimal>("PricePerDay")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("price");
 
-                    b.HasKey("CarId");
+                    b.Property<int>("Year")
+                        .HasColumnType("int")
+                        .HasColumnName("year");
 
-                    b.ToTable("Cars");
+                    b.HasKey("Id");
+
+                    b.ToTable("Car");
                 });
 
             modelBuilder.Entity("Rent_A_Car.Models.ApplicationUser", b =>
@@ -296,6 +274,45 @@ namespace Rent_A_Car.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Rent_A_Car.Reservation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CarId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("car_id");
+
+                    b.Property<string>("ClientName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("user");
+
+                    b.Property<DateTime>("EndDay")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("end_day");
+
+                    b.Property<DateTime>("StartDay")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("start_day");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("state");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Reservation");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -347,20 +364,15 @@ namespace Rent_A_Car.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Rent_A_Car.BookedCar", b =>
+            modelBuilder.Entity("Rent_A_Car.Reservation", b =>
                 {
                     b.HasOne("Rent_A_Car.Car", "Car")
-                        .WithMany("BookedCars")
+                        .WithMany()
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Car");
-                });
-
-            modelBuilder.Entity("Rent_A_Car.Car", b =>
-                {
-                    b.Navigation("BookedCars");
                 });
 #pragma warning restore 612, 618
         }

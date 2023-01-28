@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
         html {
-            background-color: #ffff99;
-            
+            background-color: #ffff99;        
         }
         
         li, a, button {
@@ -24,15 +23,16 @@
         
         button {
             padding: 9px 25px;
-            background-color: rgba(0,136,169,1) border: none;
+            background-color: rgba(0,136,169,1); 
+            border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease 0s;
         }
 
-            button:hover {
-                background-color: rgba(0,136,169,0.8)
-            }
+        button:hover, li:hover, a:hover {
+                background-color: rgba(255,30,150,0.05)
+        }
     </style>
 </head>
 <body>
@@ -49,22 +49,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="CarIndex">Cars</a>
-                        </li>
-                        <li class="nav-item">
-                            @if (User.IsInRole("User") || User.IsInRole("Admin"))
-                            {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="BookIndex">Booking</a>
-                            }
-                            else
-                            {
-                                <a class="nav-link text-dark" asp-area="Identity" asp-page = "/Account/Login">Booking</a>
-                            }
-                        </li>
+                 
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">

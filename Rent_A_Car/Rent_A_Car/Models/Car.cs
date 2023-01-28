@@ -1,34 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-#nullable disable
 
 namespace Rent_A_Car
 {
+    [Table("Car")]
     public class Car
     {
-        public Car()
-        {
-            BookedCars = new HashSet<BookedCar>();
-        }
-
-        [Key]      
-        public int CarId { get; set; }
-        [Required]
+        [Key]
+        [Column("id")]
+        public long Id { get; private set; }
+        [Column("brand")]
         public string Brand { get; set; }
-        [Required]
+        [Column("model")]
         public string Model { get; set; }
-        [Required]
-        public int CarYear { get; set; }
+        [Column("year")]
+        public int Year { get; set; }
+        [Column("description")]
         public string Description { get; set; }
-        [Required]
-        [Range(0, 999.99)]
-        public decimal PricePerDay { get; set; }
-
-        public string FullCarInfo => $"{Brand} {Model} {PricePerDay}$";
-
-        public virtual ICollection<BookedCar> BookedCars { get; set; }
+        [Column("price")]
+        public decimal Price { get; set; }
+        [Column("is_booked")]
+        public bool IsBooked { get; set; }
     }
 }
